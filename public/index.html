@@ -7,9 +7,17 @@
     <title>JSON Test</title>
 </head>
 <body>
-    <div id="myData"></div>
+    <button onclick="main('2011')">2011</button>
+    <button onclick="main('2012')">2012</button>
+    <button onclick="main('2013')">2013</button>
+    <button onclick="main('2014')">2014</button>
+    <div id="myData">
+        
+    </div>
     <script>
-        fetch('/matches/2012')
+
+        function main(id){
+            fetch(`/matches/${id}`)
             .then(function (response) {
                 return response.json();
             })
@@ -19,10 +27,11 @@
             .catch(function (err) {
                 console.log('error: ' + err);
             });
+        }
         function appendData(data) {
-            var mainContainer = document.getElementById("myData");
-            for (var i = 0; i < data.length; i++) {
-                var div = document.createElement("div");
+            let mainContainer = document.getElementById("myData");
+            for (let i = 0; i < data.length; i++) {
+                let div = document.createElement("div");
                 div.innerHTML = 'Season: ' + data[i].year + ' ' + 'player_of_the_match: ' + data[i].player_of_the_match;
                 mainContainer.appendChild(div);
             }
